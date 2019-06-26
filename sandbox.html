@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Power That's Inside</title>
+    <link rel="stylesheet" href="sandbox.css">
+</head>
+<body>
+    <div class="whole-page">
+        <div id="pokemon-name-container" class="display">
+                <h1 id="pokemon-name"></h1>
+                <img id="pokemon-image" src="" alt="Gotta catch em all!">
+        </div>
+        <br>
+        <input id="chooseAPokemon" type="text"> 
+        <br>
+        <button class="poke-button" onclick="choosePokemon()">Get Pokemon</button>
+    </div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        // let axiosEx = {
+        //     get:function(url){
+        //         return promise
+        //     }
+        // }
+        // let promise = {
+        //     then:function(cb){
+        //          cb(data)
+        //     }
+        // }
+        function choosePokemon() {
+            let id = document.getElementById("chooseAPokemon").value;
+            if (id) {
+                let prom = axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
+                prom.then((response) => {
+                    document.getElementById("pokemon-name").innerHTML = `${response.data.name} (${response.data.id})`
+                    document.getElementById("pokemon-image").src = response.data.sprites.front_default
+                })
+            }
+
+        }
+    
+    </script>
+</body>
+</html>
